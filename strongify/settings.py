@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,3 +106,10 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+# Configuration for django.rest_framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',
+        ),
+    'PAGE_SIZE': 10
+}
