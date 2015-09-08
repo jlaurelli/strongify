@@ -51,6 +51,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'strongify.apps.authentication',
+    'strongify.apps.strongify_foundation',
 )
 
 MIDDLEWARE_CLASSES = (
