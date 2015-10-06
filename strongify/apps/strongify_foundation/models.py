@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 
 """
@@ -15,6 +16,7 @@ Exercise - An atomic exercise movement. These are independent of a routine or
 
 
 class Program(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200)
     routine = models.ForeignKey(Routine)
 
@@ -23,6 +25,7 @@ class Program(models.Model):
 
 
 class Routine(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
     program = models.ForeignKey(Model)
     exercise = models.ForeignKey(Exercise)
@@ -32,6 +35,7 @@ class Routine(models.Model):
 
 
 class Exercise(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
 
     def __str__(self):
