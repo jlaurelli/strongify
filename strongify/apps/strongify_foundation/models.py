@@ -34,14 +34,14 @@ class Routine(models.Model):
 
 
 class Exercise(models.Model):
-    TYPES = [
+    MOVEMENT_TYPES = [
         ("compound", "Compound"),
         ("isolation", "Isolation")
     ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
-    type = models.CharField(max_length=100, choices=TYPES)
+    movement_type = models.CharField(max_length=100, choices=MOVEMENT_TYPES)
 
     def __str__(self):
         return self.name
