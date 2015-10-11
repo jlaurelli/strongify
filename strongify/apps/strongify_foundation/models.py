@@ -18,7 +18,7 @@ Exercise - An atomic exercise movement. These are independent of a routine or
 class Program(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200)
-    routine = models.ForeignKey("Routine")
+    routine = models.ManyToManyField("Routine")
 
     def __str__(self):
         return self.name
@@ -27,15 +27,21 @@ class Program(models.Model):
 class Routine(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
-    exercise = models.ForeignKey("Exercise")
+    exercise = models.ManyToManyField("Exercise")
 
     def __str__(self):
         return self.name
 
 
 class Exercise(models.Model):
+    TYPES = [
+        ("compound", "Compound"),
+        ("isolation", "Isolation")
+    ]
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
+    type = models.CharField(max_length=100, choices=TYPES)
 
     def __str__(self):
         return self.name
