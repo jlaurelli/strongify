@@ -40,8 +40,9 @@ class Exercise(models.Model):
     ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    movement_type = models.CharField(max_length=100, choices=MOVEMENT_TYPES,
+                                     default="compound")
     name = models.CharField(max_length=100)
-    movement_type = models.CharField(max_length=100, choices=MOVEMENT_TYPES)
 
     def __str__(self):
         return self.name

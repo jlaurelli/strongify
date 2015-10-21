@@ -14,22 +14,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Exercise',
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, serialize=False, primary_key=True, editable=False)),
+                ('id', models.UUIDField(editable=False, default=uuid.uuid4, primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=100)),
-                ('movement_type', models.CharField(max_length=100, choices=[('compound', 'Compound'), ('isolation', 'Isolation')])),
             ],
         ),
         migrations.CreateModel(
             name='Program',
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, serialize=False, primary_key=True, editable=False)),
+                ('id', models.UUIDField(editable=False, default=uuid.uuid4, primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(
             name='Routine',
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, serialize=False, primary_key=True, editable=False)),
+                ('id', models.UUIDField(editable=False, default=uuid.uuid4, primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=100)),
                 ('exercise', models.ManyToManyField(to='strongify_foundation.Exercise')),
             ],
