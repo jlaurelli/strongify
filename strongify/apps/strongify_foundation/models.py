@@ -16,7 +16,19 @@ Exercise - An atomic exercise movement. These are independent of a routine or
 
 
 class Program(models.Model):
+    DAY_SPREADS = [
+        (0, "other"),
+        (1, "1 Day"),
+        (2, "2 Days"),
+        (3, "3 Days"),
+        (4, "4 Days"),
+        (5, "5 Days"),
+        (6, "6 Days"),
+        (7, "Everyday")
+    ]
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    day_spread = models.PositiveIntegerField(choices=DAY_SPREADS, default=3)
     name = models.CharField(max_length=200)
     routine = models.ManyToManyField("Routine")
 

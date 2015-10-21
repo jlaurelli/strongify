@@ -12,7 +12,7 @@ class RoutineAdmin(admin.ModelAdmin):
 
 
 class ProgramAdmin(admin.ModelAdmin):
-    fields = ["name", "routine"]
+    fields = ["name", "routine", "day_spread"]
 
 
 admin.site.register(Exercise, ExerciseAdmin)
