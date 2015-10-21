@@ -1,4 +1,5 @@
 import uuid
+import django.contrib.postgres.fields as pgfields
 from django.db import models
 
 """
@@ -9,6 +10,9 @@ Program - A set of routines. This encompasses several days worth of workouts
 
 Routine - A set of exercises that compose a unit in a program. Acts as a
           linker between the programs and exercises.
+
+RoutineStep - A sub-component of the Routine, it acts as a linker between
+              exercises and routines.
 
 Exercise - An atomic exercise movement. These are independent of a routine or
            program, and multiples can exist within any routine/program.
@@ -36,13 +40,28 @@ class Program(models.Model):
         return self.name
 
 
+class RepetitionSet(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    repetition_set = pgfields.ArrayField(
+        pgfields.ArrayField(
+            models.PositiveIntegerField(),
+            size=2
+        ))
+
+
 class Routine(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
-    exercise = models.ManyToManyField("Exercise")
+    routine_step = models.ManyToManyField("RoutineStep")
 
     def __str__(self):
         return self.name
+
+
+class RoutineStep(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    exercise = models.ForeignKey("Exercise")
+    repetitions = models.ForeignKey("RepetitionSet")
 
 
 class Exercise(models.Model):
