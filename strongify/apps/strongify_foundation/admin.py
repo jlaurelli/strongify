@@ -4,7 +4,7 @@ from .models import Exercise, Program, Routine
 
 
 class ExerciseAdmin(admin.ModelAdmin):
-    fields = ["name"]
+    fields = ["name", "movement_type"]
 
 
 class RoutineAdmin(admin.ModelAdmin):
