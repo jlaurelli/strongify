@@ -36,7 +36,6 @@ class Program(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     day_spread = models.PositiveIntegerField(choices=DAY_SPREADS, default=3)
     name = models.CharField(max_length=200)
-    routine = models.ManyToManyField("Routine")
 
     def __str__(self):
         return self.name
@@ -54,21 +53,28 @@ class RepetitionSet(models.Model):
 
 
 class Routine(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
-    routine_step = models.ManyToManyField("RoutineStep")
+    program = models.ForeignKey("Program")
 
     def __str__(self):
         return self.name
 
+    class Meta:
+        unique_together = (("program", "name"),)
+
 
 class RoutineStep(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     exercise = models.ForeignKey("Exercise")
     repetition_set = models.ForeignKey("RepetitionSet")
+    routine = models.ManyToManyField("Routine")
 
     def __str__(self):
         return "{} ({})".format(self.exercise, self.repetition_set)
+
+    class Meta:
+        unique_together = (("repetition_set", "exercise"),)
 
 
 class Exercise(models.Model):
