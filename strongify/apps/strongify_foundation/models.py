@@ -16,6 +16,8 @@ RoutineStep - A sub-component of the Routine, it acts as a linker between
 
 Exercise - An atomic exercise movement. These are independent of a routine or
            program, and multiples can exist within any routine/program.
+
+TODO - Figure out how to set weights and design workout attempt models.
 """
 
 
@@ -43,10 +45,12 @@ class Program(models.Model):
 class RepetitionSet(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     repetition_set = pgfields.ArrayField(
-        pgfields.ArrayField(
-            models.PositiveIntegerField(),
-            size=2
-        ))
+        models.PositiveIntegerField(),
+        size=2
+    )
+
+    def __str__(self):
+        return "{} X {}".format(self.repetition_set[0], self.repetition_set[1])
 
 
 class Routine(models.Model):
@@ -61,7 +65,10 @@ class Routine(models.Model):
 class RoutineStep(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     exercise = models.ForeignKey("Exercise")
-    repetitions = models.ForeignKey("RepetitionSet")
+    repetition_set = models.ForeignKey("RepetitionSet")
+
+    def __str__(self):
+        return "{} ({})".format(self.exercise, self.repetition_set)
 
 
 class Exercise(models.Model):
