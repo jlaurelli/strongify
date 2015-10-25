@@ -53,7 +53,6 @@ class RepetitionSet(models.Model):
 
 
 class Routine(models.Model):
-    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
     program = models.ForeignKey("Program")
 
@@ -65,7 +64,6 @@ class Routine(models.Model):
 
 
 class RoutineStep(models.Model):
-    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     exercise = models.ForeignKey("Exercise")
     repetition_set = models.ForeignKey("RepetitionSet")
     routine = models.ManyToManyField("Routine")

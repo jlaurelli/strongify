@@ -9,17 +9,10 @@ class ExerciseAdmin(admin.ModelAdmin):
 
 class RoutineStepInline(admin.StackedInline):
     model = RoutineStep
-    extra = 3
-
-
-class RoutineAdmin(admin.ModelAdmin):
-    fields = ["name"]
-    # inlines = [RoutineStepInline]
 
 
 class RoutineInline(admin.StackedInline):
     model = Routine
-    extra = 2
 
 
 class ProgramAdmin(admin.ModelAdmin):
@@ -29,6 +22,6 @@ class ProgramAdmin(admin.ModelAdmin):
 
 admin.site.register(Exercise, ExerciseAdmin)
 admin.site.register(Program, ProgramAdmin)
-# admin.site.register(Routine, RoutineAdmin)
 admin.site.register(RepetitionSet)
-# admin.site.register(RoutineStep)
+admin.site.register(Routine)
+admin.site.register(RoutineStep)
