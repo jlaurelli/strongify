@@ -50,8 +50,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'strongify.apps.authentication',
+    # 'rest_framework',
+    # 'strongify.apps.authentication',
     'strongify.apps.strongify_foundation',
 )
 
