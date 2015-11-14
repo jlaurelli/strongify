@@ -7,6 +7,15 @@ class ExerciseAdmin(admin.ModelAdmin):
     fields = ["name", "movement_type"]
 
 
+class RepetitionSetAdmin(admin.ModelAdmin):
+    ordering = ("repetition_set",)
+
+
+class RoutineAdmin(admin.ModelAdmin):
+    ordering = ("name",)
+    fields = ["program", "name"]
+
+
 class RoutineStepInline(admin.StackedInline):
     model = RoutineStep
 
@@ -22,6 +31,6 @@ class ProgramAdmin(admin.ModelAdmin):
 
 admin.site.register(Exercise, ExerciseAdmin)
 admin.site.register(Program, ProgramAdmin)
-admin.site.register(RepetitionSet)
-admin.site.register(Routine)
+admin.site.register(RepetitionSet, RepetitionSetAdmin)
+admin.site.register(Routine, RoutineAdmin)
 admin.site.register(RoutineStep)
